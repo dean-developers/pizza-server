@@ -6,7 +6,11 @@ Install Node Version Manager on your system
 ```
 $ nvm install v11.15
 ```
-
+Create database
+```
+$ sudo -u postgres psql
+$ create database "pizza_development";
+```
 Use Node
 
 ```
