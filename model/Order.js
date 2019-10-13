@@ -14,6 +14,10 @@ module.exports = function(sequelize, DataTypes) {
         Order.belongsTo(models.Client, {
             as: 'client', foreignKey: 'clientId'
         });
+
+        Order.belongsTo(models.City, {
+            as: 'city', foreignKey: 'cityId'
+        });
     };
 
     return Order;

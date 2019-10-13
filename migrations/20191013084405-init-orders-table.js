@@ -16,6 +16,27 @@ module.exports = {
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL'
             },
+            cityId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'Cities',
+                    key: 'id'
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'SET NULL'
+            },
+            street: {
+                type: Sequelize.STRING,
+                allowNull: false
+            },
+            houseNumber: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
+            comment: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
             status: {
                 type: Sequelize.ENUM,
                 values: ['success', 'processing', 'cancelled']
