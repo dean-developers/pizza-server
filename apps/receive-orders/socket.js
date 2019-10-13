@@ -13,7 +13,18 @@ export default {
         socket.on('order', async (data) => {
             logger.info(`Order: ${JSON.stringify(data)}`);
 
-            const { phone, name, surname } = data;
+            const { cityName, phone, name, surname, street, houseNumber } = data;
+
+            const city = await model.City.findOne({
+                where: {
+                    name: cityName
+                }
+            });
+
+            if (!city) {
+                io.emit('error', { status: '404', description: 'cityNotFound' });
+                return ;
+            }
 
             const [client, created] = await model.Client.findOrCreate({
                 where: {
@@ -24,9 +35,14 @@ export default {
                 }
             });
 
+
+
             if (client) {
                 await model.Order.create({
                     clientId: client.id,
+                    cityId: city.id,
+                    street,
+                    houseNumber,
                     status: 'processing'
                 });
             }

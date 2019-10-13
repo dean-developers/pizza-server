@@ -11,12 +11,15 @@
 </head>
 <body>
 <h1>Receive orders</h1>
-<div class="new_order">
-    <!--    <input id="street" type="text" placeholder="Enter street">-->
+<div class="new_order" style="display: flex; flex-direction: column;">
+    <input id="city" type="text" placeholder="Enter city">
     <input id="phone" type="text" placeholder="Enter phone">
     <input id="name" type="text" placeholder="Enter name">
     <input id="surname" type="text" placeholder="Enter surname">
+    <input id="street" type="text" placeholder="Enter street">
+    <input id="houseNumber" type="text" placeholder="Enter houseNumber">
     <button type="submit" id="send">Send</button>
+    <div id="error"></div>
 </div>
 <div class="orders__block">
     <ul id="orders"></ul>
@@ -26,14 +29,22 @@
     const socket = io();
 
     $('#send').click(() => {
-        // const street = $('#street');
+        const street = $('#street');
         const phone = $('#phone');
         const name = $('#name');
         const surname = $('#surname');
-        socket.emit('order', { phone: phone.val(), name: name.val(), surname: surname.val() });
-        phone.val('');
-        name.val('');
-        surname.val('');
+        const city = $('#city');
+        const houseNumber = $('#houseNumber');
+        socket.emit('order', {
+            phone: phone.val(), name: name.val(), surname: surname.val(), cityName: city.val(),
+            street: street.val(), houseNumber: houseNumber.val()
+        });
+        // phone.val('');
+        // name.val('');
+        // surname.val('');
+        // city.val('');
+        // houseNumber.val('');
+        // street.val('');
     });
 
     socket.on('received', orders => {
@@ -41,6 +52,10 @@
             $('#orders').append(`<li>ID: ${order.id}, Phone number: ${order.client.phone}, Name: ${order.client.name}</li>`);
         });
     });
+    socket.on('error', error => {
+        console.log(error);
+        $('#error').append(`<p>${error.description}</p>`)
+    })
 </script>
 
 </body>
