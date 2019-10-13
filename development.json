@@ -1,0 +1,17 @@
+{
+    "apps": [
+        {
+            "name": "socket-server-nodejs",
+            "script": "./start.js",
+            "watch": true,
+            "instance_var": "0",
+            "ignore_watch": [
+                "node_modules",
+                "logs"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            }
+        }
+    ]
+}

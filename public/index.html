@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <title>Test socket</title>
+</head>
+<body>
+<h1>Receive orders</h1>
+<div class="new_order">
+    <!--    <input id="street" type="text" placeholder="Enter street">-->
+    <input id="phone" type="text" placeholder="Enter phone">
+    <input id="name" type="text" placeholder="Enter name">
+    <input id="surname" type="text" placeholder="Enter surname">
+    <button type="submit" id="send">Send</button>
+</div>
+<div class="orders__block">
+    <ul id="orders"></ul>
+</div>
+
+<script>
+    const socket = io();
+
+    $('#send').click(() => {
+        // const street = $('#street');
+        const phone = $('#phone');
+        const name = $('#name');
+        const surname = $('#surname');
+        socket.emit('order', { phone: phone.val(), name: name.val(), surname: surname.val() });
+        phone.val('');
+        name.val('');
+        surname.val('');
+    });
+
+    socket.on('received', orders => {
+        orders.forEach((order) => {
+            $('#orders').append(`<li>ID: ${order.id}, Phone number: ${order.client.phone}, Name: ${order.client.name}</li>`);
+        });
+    });
+</script>
+
+</body>
+</html>
