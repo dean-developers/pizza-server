@@ -3,6 +3,7 @@ import logger from '../lib/logger';
 import bodyParser from 'koa-bodyparser';
 import koaStatic from 'koa-static';
 import path from 'path';
+import cors from '@koa/cors';
 
 import exceptionLogger from '../lib/exception-logger';
 import requestLogger from '../lib/request-logger';
@@ -20,6 +21,7 @@ app.use(exceptionLogger);
 app.use(requestLogger);
 app.use(bodyParser());
 app.use(koaStatic(publicPath));
+app.use(cors());
 
 app.use(receiveOrdersRoutes());
 app.use(receiveOrdersAllowedMethods());
