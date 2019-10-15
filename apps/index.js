@@ -17,11 +17,11 @@ const server = require('http').createServer(app.callback());
 
 const io = require('socket.io')(server);
 
+app.use(cors());
 app.use(exceptionLogger);
 app.use(requestLogger);
 app.use(bodyParser());
 app.use(koaStatic(publicPath));
-app.use(cors());
 
 app.use(receiveOrdersRoutes());
 app.use(receiveOrdersAllowedMethods());

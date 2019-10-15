@@ -51,12 +51,18 @@
         });
     });
 
-    $('#check').click(() => {
+    $('#check').click(async () => {
         const city = $('#city');
         const street = $('#street');
         const houseNumber = $('#houseNumber');
         const frame = $('#gmap_canvas');
-        frame.attr('src', `https://maps.google.com/maps?q=${city.val()} ${street.val()} ${houseNumber.val()}&t=&z=13&ie=UTF8&iwloc=&output=embed`);
+        await $.ajax(`http://127.0.0.1:3000/address?searchtext=${city.val()} ${street.val()} ${houseNumber.val()}`).done((data) => {
+            const { street, houseNumber, coord } = data[0];
+            $('#street').val(street);
+            $('#houseNumber').val(houseNumber);
+            frame.attr('src', `https://maps.google.com/maps?q=${coord}&t=&z=16&ie=UTF8&iwloc=&output=embed`);
+        });
+
         console.log(frame.attr('src'))
     });
 
