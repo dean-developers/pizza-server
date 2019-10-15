@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/core.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <title>Test socket</title>
 </head>
@@ -18,15 +19,24 @@
     <input id="surname" type="text" placeholder="Enter surname">
     <input id="street" type="text" placeholder="Enter street">
     <input id="houseNumber" type="text" placeholder="Enter houseNumber">
+    <button type="submit" id="check">Check Address</button>
     <button type="submit" id="send">Send</button>
     <div id="error"></div>
 </div>
 <div class="orders__block">
     <ul id="orders"></ul>
 </div>
-
+<iframe width="600" height="500" id="gmap_canvas"
+        src=""
+        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
 <script>
     const socket = io();
+
+    socket.emit('login', {
+        login: 'Denis',
+        password: '12345',
+        token: 'H59rv645l'
+    });
 
     $('#send').click(() => {
         const street = $('#street');
@@ -39,12 +49,15 @@
             phone: phone.val(), name: name.val(), surname: surname.val(), cityName: city.val(),
             street: street.val(), houseNumber: houseNumber.val()
         });
-        // phone.val('');
-        // name.val('');
-        // surname.val('');
-        // city.val('');
-        // houseNumber.val('');
-        // street.val('');
+    });
+
+    $('#check').click(() => {
+        const city = $('#city');
+        const street = $('#street');
+        const houseNumber = $('#houseNumber');
+        const frame = $('#gmap_canvas');
+        frame.attr('src', `https://maps.google.com/maps?q=${city.val()} ${street.val()} ${houseNumber.val()}&t=&z=13&ie=UTF8&iwloc=&output=embed`);
+        console.log(frame.attr('src'))
     });
 
     socket.on('received', orders => {

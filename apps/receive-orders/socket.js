@@ -6,6 +6,11 @@ export default {
     controller: socket => {
         logger.info(`Connection: ${socket.id}`);
 
+        socket.on('login', async (data) => {
+            console.log(data);
+            // todo: save to db token
+        });
+
         socket.on('disconnect', socket => {
             logger.info(`Disconnected: ${socket.id}`)
         });

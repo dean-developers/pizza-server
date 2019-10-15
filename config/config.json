@@ -1,1 +1,10 @@
-{}
+{
+    "geocode": {
+        "here": {
+            "url": "https://geocoder.api.here.com/6.2/geocode.json",
+            "method": "GET",
+            "appId": "mMEP19X4OHHY3dlkhS36",
+            "appCode": "qLGn_5VeZXZKOtM6VHSIQg"
+        }
+    }
+}
