@@ -1,6 +1,8 @@
 import Router from 'koa-router';
-import axios from 'axios';
-import config from '../../config/config';
+
+import Address from './controllers/address';
+import Auth from '../middleware/auth';
+import User from './controllers/user';
 
 const router = new Router();
 
@@ -8,37 +10,13 @@ router.get('/', async (ctx) => {
     await ctx.render('index.html');
 });
 
-router.get('/address', async (ctx) => {
-    const { searchtext } = ctx.request.query;
+router.get('/user', Auth.checkToken, User.getUser);
+router.post('/user/create', Auth.checkToken, User.create);
+router.post('/login', Auth.getToken);
+router.get('/logout', User.logOut)
+router.post('/custom', Auth.checkToken);
 
-    const apiConfig = config.geocode.here;
-
-    const response = await axios.get(apiConfig.url, {
-        params: {
-            app_id: apiConfig.appId,
-            app_code: apiConfig.appCode,
-            searchtext
-        }
-    });
-
-    if (response.status === 200) {
-        const view = response.data && response.data.Response && response.data.Response.View
-            && response.data.Response.View;
-        const [result] = view.map((item) => {
-            return item.Result && item.Result.map((it) => {
-                return it.Location && it.Location.Address && {
-                    street: it.Location.Address.Street,
-                    houseNumber: it.Location.Address.HouseNumber,
-                    coord: `${it.Location.DisplayPosition.Latitude},${it.Location.DisplayPosition.Longitude}`
-                };
-            });
-        });
-
-        ctx.body = result;
-    } else {
-        ctx.body = { status: '404', description: 'invalidQuery' };
-    }
-});
+router.get('/address', Address.normalize);
 
 export function receiveOrdersRoutes() {
     return router.routes()

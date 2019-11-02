@@ -5,6 +5,7 @@ import model from '../../model';
 export default {
     controller: socket => {
         logger.info(`Connection: ${socket.id}`);
+        // console.log('this is the name from the JWT: ' + socket.decoded_token.displayName);
 
         socket.on('login', async (data) => {
             console.log(data);
