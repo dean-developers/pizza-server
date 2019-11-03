@@ -7,5 +7,6 @@
             "appCode": "qLGn_5VeZXZKOtM6VHSIQg"
         }
     },
-    "jwtSecret": "H59rv645l"
+    "jwtSecret": "H59rv645l",
+    "expiresIn": "1440m"
 }

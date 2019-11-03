@@ -28,10 +28,10 @@ const server = require('http').createServer(app.callback());
 
 const io = require('socket.io')(server);
 
-app.use(cors());
 app.use(passport.initialize());
 app.use(exceptionLogger);
 app.use(requestLogger);
+app.use(cors());
 app.use(bodyParser());
 app.use(koaStatic(publicPath));
 

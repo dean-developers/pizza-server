@@ -27,12 +27,7 @@ const create = async (ctx) => {
     ctx.body = helpers.userSerialize(user);
 };
 
-const logOut = async (ctx) => {
-    ctx.logout();
-};
-
 module.exports = {
     getUser,
-    create,
-    logOut
+    create
 };

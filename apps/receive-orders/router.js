@@ -13,8 +13,6 @@ router.get('/', async (ctx) => {
 router.get('/user', Auth.checkToken, User.getUser);
 router.post('/user/create', Auth.checkToken, User.create);
 router.post('/login', Auth.getToken);
-router.get('/logout', User.logOut)
-router.post('/custom', Auth.checkToken);
 
 router.get('/address', Address.normalize);
 

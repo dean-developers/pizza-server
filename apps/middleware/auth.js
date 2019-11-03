@@ -2,12 +2,14 @@ import passport from 'koa-passport';
 import jwt from 'jsonwebtoken';
 import config from '../../config/config';
 import helpers from '../../lib/helpers';
+import logger from '../../lib/logger';
 
 const jwtSecret = config.jwtSecret;
 
 const checkToken = async (ctx, next) => {
     await passport.authenticate('jwt', async function(err, user) {
         if (user) {
+            logger.info(`USER auth id[${user.id}]`);
             ctx.user = user;
             await next();
         } else {
@@ -29,7 +31,7 @@ const getToken = async (ctx, next) => {
 
             ctx.body = {
                 user: helpers.userSerialize(user),
-                jwt: jwt.sign(payload, jwtSecret)
+                jwt: jwt.sign(payload, jwtSecret, { expiresIn: config.expiresIn })
             };
         }
     })(ctx, next);
