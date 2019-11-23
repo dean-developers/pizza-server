@@ -7,6 +7,7 @@ import logger from '../../lib/logger';
 const jwtSecret = config.jwtSecret;
 
 const checkToken = async (ctx, next) => {
+    console.log(JSON.stringify(ctx.headers));
     await passport.authenticate('jwt', async function(err, user) {
         if (user) {
             logger.info(`USER auth id[${user.id}]`);

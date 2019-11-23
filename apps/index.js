@@ -44,6 +44,7 @@ passport.use(new LocalStrategy({
         session: false
     },
     async function(login, password, done) {
+        console.log(`${login}, ${password}`);
         const user = await model.User.findOne({ where: { login } });
 
         if (!user || !user.checkPassword(password)) {

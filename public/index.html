@@ -23,6 +23,7 @@
     <button type="submit" id="send">Send</button>
     <div id="error"></div>
 </div>
+<button id="logout">Logout</button>
 <div class="orders__block">
     <ul id="orders"></ul>
 </div>
@@ -33,9 +34,10 @@
     const socket = io();
 
     socket.emit('login', {
-        login: 'Denis',
-        password: '12345',
-        token: 'H59rv645l'
+        id: '15',
+        login: 'admin',
+        password: '123123',
+        token: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImxvZ2luIjoiYWRtaW4iLCJpYXQiOjE1NzI3ODQ3MTEsImV4cCI6MTU3Mjg3MTExMX0.pBP6LLLtPaoXKlC9QYtYgkoZsxKvH6KMDSgadEYnFY4'
     });
 
     $('#send').click(() => {
@@ -64,6 +66,12 @@
         });
 
         console.log(frame.attr('src'))
+    });
+
+    $('#logout').click(async () => {
+        socket.emit('order', {
+            id: '15'
+        });
     });
 
     socket.on('received', orders => {
