@@ -16,6 +16,8 @@ router.post('/login', Auth.getToken);
 
 router.get('/address', Address.normalize);
 
+router.get('/users', Auth.checkToken, User.getUsers);
+
 export function receiveOrdersRoutes() {
     return router.routes()
 }

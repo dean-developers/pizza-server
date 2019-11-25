@@ -27,7 +27,12 @@ const create = async (ctx) => {
     ctx.body = helpers.userSerialize(user);
 };
 
+const getUsers = async(ctx) => {
+    ctx.body = await model.User.findAll();
+};
+
 module.exports = {
     getUser,
-    create
+    create,
+    getUsers
 };
