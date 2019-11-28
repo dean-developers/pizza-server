@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         type: {
             type: DataTypes.ENUM,
-            values: ['operator', 'admin', 'boss'],
+            values: ['operator', 'admin', 'driver'],
             allowNull: false
         },
         status: {

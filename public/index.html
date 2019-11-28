@@ -32,12 +32,9 @@
         frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
 <script>
     const socket = io();
-
+    // first step - id отримуєш з POST /login
     socket.emit('login', {
-        id: '15',
-        login: 'admin',
-        password: '123123',
-        token: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImxvZ2luIjoiYWRtaW4iLCJpYXQiOjE1NzI3ODQ3MTEsImV4cCI6MTU3Mjg3MTExMX0.pBP6LLLtPaoXKlC9QYtYgkoZsxKvH6KMDSgadEYnFY4'
+        id: '15'
     });
 
     $('#send').click(() => {
@@ -69,6 +66,7 @@
     });
 
     $('#logout').click(async () => {
+        // emit order. не зважай щот тут logout
         socket.emit('order', {
             id: '15'
         });

@@ -1,5 +1,6 @@
 import axios from 'axios';
-import config from "../../../config/config";
+import config from '../../../config/config';
+import model from '../../../model'
 
 const normalize = async (ctx) => {
     const { searchtext } = ctx.request.query;
@@ -34,6 +35,15 @@ const normalize = async (ctx) => {
     }
 };
 
+const cities = async (ctx) => {
+    const cities = await model.City.findAll();
+
+    ctx.body = {
+        cities
+    }
+};
+
 module.exports = {
-    normalize
+    normalize,
+    cities
 };

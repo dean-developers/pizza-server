@@ -16,7 +16,7 @@ module.exports = {
             },
             type: {
                 type: Sequelize.ENUM,
-                values: ['operator', 'admin', 'boss'],
+                values: ['operator', 'admin', 'driver'],
                 allowNull: false
             },
             createdAt: {
