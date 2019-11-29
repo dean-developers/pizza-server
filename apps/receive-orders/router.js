@@ -23,6 +23,7 @@ router.get('/pizza', Auth.checkToken, Pizza.pizzas);
 router.post('/pizza', Auth.checkToken, Pizza.create);
 router.put('/pizza/:id', Auth.checkToken, Pizza.change);
 router.delete('/pizza/:id', Auth.checkToken, Pizza.deletePizza);
+router.get('/pizza/ingredients', Auth.checkToken, Pizza.ingredients);
 
 export function receiveOrdersRoutes() {
     return router.routes()
