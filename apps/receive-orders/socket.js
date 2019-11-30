@@ -43,6 +43,11 @@ export default {
 
             const { cityName, phone, name, surname, street, houseNumber } = data;
 
+            if (!phone || !cityName || !name || !surname) {
+                io.emit('error', { status: '400', description: 'badRequest' });
+                return;
+            }
+
             const city = await model.City.findOne({
                 where: {
                     name: cityName
@@ -50,6 +55,7 @@ export default {
             });
 
             if (!city) {
+                logger.error(`City '${city}' not found`);
                 io.emit('error', { status: '404', description: 'cityNotFound' });
                 return;
             }
