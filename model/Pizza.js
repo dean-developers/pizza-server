@@ -14,11 +14,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         ingredients: {
             type: DataTypes.ARRAY(DataTypes.STRING)
-        },
-        additionalIngredients: {
-            allowNull: false,
-            type: DataTypes.JSONB,
-            defaultValue: {}
         }
     }, {});
     Pizza.associate = function(models) {

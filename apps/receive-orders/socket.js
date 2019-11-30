@@ -70,15 +70,18 @@ export default {
             });
 
             if (client) {
-                await model.Order.create({
+                io.emit('order', await model.Order.create({
                     clientId: client.id,
                     cityId: city.id,
                     street,
                     houseNumber,
                     status: 'processing'
-                });
+                }));
             }
+        });
 
+        socket.on('received', async function() {
+            logger.info('[EMIT] received');
             const orders = await model.Order.findAll({
                 where: {
                     status: 'processing'
@@ -90,7 +93,7 @@ export default {
                 }
             });
 
-            io.emit('received', orders);
+            io.emit('orders', orders);
         });
     }
 };

@@ -22,11 +22,6 @@ module.exports = {
             ingredients: {
                 type: Sequelize.ARRAY(Sequelize.STRING)
             },
-            additionalIngredients: {
-                allowNull: false,
-                type: Sequelize.JSONB,
-                defaultValue: {}
-            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
