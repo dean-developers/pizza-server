@@ -9,9 +9,13 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER
         },
         additionalIngredients: {
-            allowNull: false,
-            type: DataTypes.JSONB,
-            defaultValue: {}
+            type: DataTypes.ARRAY(DataTypes.STRING)
+        },
+        sum: {
+            type: DataTypes.STRING
+        },
+        weight: {
+            type: DataTypes.STRING
         },
     }, {});
     PizzaOrder.associate = function(models) {

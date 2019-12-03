@@ -26,9 +26,13 @@ module.exports = {
                 onDelete: 'SET NULL'
             },
             additionalIngredients: {
-                allowNull: false,
-                type: Sequelize.JSONB,
-                defaultValue: {}
+                type: Sequelize.ARRAY(Sequelize.STRING)
+            },
+            sum: {
+                type: Sequelize.STRING
+            },
+            weight: {
+                type: Sequelize.STRING
             },
             createdAt: {
                 allowNull: false,

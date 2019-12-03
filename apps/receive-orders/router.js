@@ -4,6 +4,7 @@ import Address from './controllers/address';
 import Auth from '../middleware/auth';
 import User from './controllers/user';
 import Pizza from './controllers/pizza';
+import Order from './controllers/order';
 
 const router = new Router();
 
@@ -25,6 +26,7 @@ router.post('/pizza', Auth.checkToken, Pizza.create);
 router.put('/pizza/:id', Auth.checkToken, Pizza.change);
 router.delete('/pizza/:id', Auth.checkToken, Pizza.deletePizza);
 router.get('/ingredients', Auth.checkToken, Pizza.ingredients);
+router.post('/order/calculate', Auth.checkToken, Order.calculate);
 
 export function receiveOrdersRoutes() {
     return router.routes()
