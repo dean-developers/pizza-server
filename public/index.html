@@ -46,7 +46,16 @@
         const houseNumber = $('#houseNumber');
         socket.emit('order', {
             phone: phone.val(), name: name.val(), surname: surname.val(), cityName: city.val(),
-            street: street.val(), houseNumber: houseNumber.val()
+            street: street.val(), houseNumber: houseNumber.val(), pizzas: [
+                {
+                    pizzaId: 1,
+                    ingredients: [1, 2]
+                },
+                {
+                    pizzaId: 2,
+                    ingredients: [2, 3, 4]
+                }
+            ]
         });
     });
 
@@ -73,10 +82,15 @@
     });
 
     socket.on('received', orders => {
+        console.log(orders);
         orders.forEach((order) => {
             $('#orders').append(`<li>ID: ${order.id}, Phone number: ${order.client.phone}, Name: ${order.client.name}</li>`);
         });
     });
+
+    // socket.on('order', orders => {
+    //     console.log(orders);
+    // });
     socket.on('error', error => {
         console.log(error);
         $('#error').append(`<p>${error.description}</p>`)

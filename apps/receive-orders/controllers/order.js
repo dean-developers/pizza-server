@@ -1,6 +1,5 @@
 require('sugar')();
 
-import model from '../../../model';
 import helpers from '../../../lib/helpers';
 
 
