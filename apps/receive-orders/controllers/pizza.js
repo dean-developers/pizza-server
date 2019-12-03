@@ -14,9 +14,25 @@ const pizzas = async (ctx) => {
     });
 };
 
+const getPizzaById = async (ctx) => {
+    const { id } = ctx.params;
+
+    if (!id) {
+        ctx.throw(400, 'badRequest');
+    }
+
+
+    const pizza = await model.Pizza.findByPk(id);
+
+    if (!pizza) {
+        ctx.throw(404, 'pizzaNotFound');
+    }
+
+    ctx.body = pizza;
+}
+
 const create = async (ctx) => {
     const { name, price, size, weight, ingredients } = ctx.request.body;
-
     if (!name || !price || !size || !weight || !ingredients) {
         ctx.throw(400, 'badRequest');
     }
@@ -33,7 +49,6 @@ const create = async (ctx) => {
 const change = async (ctx) => {
     const { id } = ctx.params;
     const { name, price, size, weight, ingredients } = ctx.request.body;
-
     if (!id) {
         ctx.throw(400, 'badRequest');
     }
@@ -83,6 +98,7 @@ const ingredients = async (ctx) => {
 
 module.exports = {
     pizzas,
+    getPizzaById,
     create,
     change,
     deletePizza,

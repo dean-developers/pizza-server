@@ -19,11 +19,12 @@ router.get('/users', Auth.checkToken, User.getUsers);
 router.get('/address', Address.normalize);
 router.get('/cities', Auth.checkToken, Address.cities);
 
-router.get('/pizza', Auth.checkToken, Pizza.pizzas);
+router.get('/pizzas', Auth.checkToken, Pizza.pizzas);
+router.get('/pizza/:id', Auth.checkToken, Pizza.getPizzaById);
 router.post('/pizza', Auth.checkToken, Pizza.create);
 router.put('/pizza/:id', Auth.checkToken, Pizza.change);
 router.delete('/pizza/:id', Auth.checkToken, Pizza.deletePizza);
-router.get('/pizza/ingredients', Auth.checkToken, Pizza.ingredients);
+router.get('/ingredients', Auth.checkToken, Pizza.ingredients);
 
 export function receiveOrdersRoutes() {
     return router.routes()
