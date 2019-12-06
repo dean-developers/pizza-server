@@ -18,6 +18,9 @@ module.exports = function(sequelize, DataTypes) {
         Order.belongsTo(models.City, {
             as: 'city', foreignKey: 'cityId'
         });
+        // Order.hasMany(models.Pizza, {
+        //     as: 'pizza', foreignKey: 'orderId'
+        // });
     };
 
     return Order;

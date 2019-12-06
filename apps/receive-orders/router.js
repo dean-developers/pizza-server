@@ -1,6 +1,10 @@
 import Router from 'koa-router';
-import axios from 'axios';
-import config from '../../config/config';
+
+import Address from './controllers/address';
+import Auth from '../middleware/auth';
+import User from './controllers/user';
+import Pizza from './controllers/pizza';
+import Order from './controllers/order';
 
 const router = new Router();
 
@@ -8,37 +12,21 @@ router.get('/', async (ctx) => {
     await ctx.render('index.html');
 });
 
-router.get('/address', async (ctx) => {
-    const { searchtext } = ctx.request.query;
+router.get('/user', Auth.checkToken, User.getUser);
+router.post('/user/create', Auth.checkToken, User.create);
+router.post('/login', Auth.getToken);
+router.get('/users', Auth.checkToken, User.getUsers);
 
-    const apiConfig = config.geocode.here;
+router.get('/address', Address.normalize);
+router.get('/cities', Auth.checkToken, Address.cities);
 
-    const response = await axios.get(apiConfig.url, {
-        params: {
-            app_id: apiConfig.appId,
-            app_code: apiConfig.appCode,
-            searchtext
-        }
-    });
-
-    if (response.status === 200) {
-        const view = response.data && response.data.Response && response.data.Response.View
-            && response.data.Response.View;
-        const [result] = view.map((item) => {
-            return item.Result && item.Result.map((it) => {
-                return it.Location && it.Location.Address && {
-                    street: it.Location.Address.Street,
-                    houseNumber: it.Location.Address.HouseNumber,
-                    coord: `${it.Location.DisplayPosition.Latitude},${it.Location.DisplayPosition.Longitude}`
-                };
-            });
-        });
-
-        ctx.body = result;
-    } else {
-        ctx.body = { status: '404', description: 'invalidQuery' };
-    }
-});
+router.get('/pizzas', Auth.checkToken, Pizza.pizzas);
+router.get('/pizza/:id', Auth.checkToken, Pizza.getPizzaById);
+router.post('/pizza', Auth.checkToken, Pizza.create);
+router.put('/pizza/:id', Auth.checkToken, Pizza.change);
+router.delete('/pizza/:id', Auth.checkToken, Pizza.deletePizza);
+router.get('/ingredients', Auth.checkToken, Pizza.ingredients);
+router.post('/order/calculate', Auth.checkToken, Order.calculate);
 
 export function receiveOrdersRoutes() {
     return router.routes()
