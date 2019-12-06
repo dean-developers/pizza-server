@@ -8,5 +8,14 @@
         }
     },
     "jwtSecret": "H59rv645l",
-    "expiresIn": "1440m"
+    "expiresIn": "1440m",
+    "production": {
+        "use_env_variable": "DATABASE_URL"
+    },
+    "username": "pizza",
+    "password": "pizza",
+    "database": "pizza_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "logging": false
 }
