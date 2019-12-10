@@ -103,7 +103,11 @@ export default {
                         },
                         {
                             model: model.Order,
-                            as: 'order'
+                            as: 'order',
+                            include: {
+                                model: model.Client,
+                                as: 'client'
+                            }
                         }
                     ]
                 }));
@@ -125,9 +129,14 @@ export default {
                         required: true,
                         where: {
                             status: 'processing'
+                        },
+                        include: {
+                            model: model.Client,
+                            as: 'client'
                         }
                     }
-                ]
+                ],
+                order: [['orderId', 'DESC']]
             });
 
             io.emit('orders', orders);

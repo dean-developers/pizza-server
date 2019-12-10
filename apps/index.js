@@ -71,7 +71,7 @@ passport.use(new JwtStrategy(jwtOptions, async function(payload, done) {
 
 io.on('connection', socket.controller);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const url = `http://localhost:${PORT}`;
 
 server.listen(PORT, () => {

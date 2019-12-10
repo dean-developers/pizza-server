@@ -1,7 +1,7 @@
 {
     "development": {
-        "username": "denis",
-        "password": "denis23",
+        "username": "payment",
+        "password": "Qwe123",
         "database": "pizza_development",
         "host": "127.0.0.1",
         "dialect": "postgres",
