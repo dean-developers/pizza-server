@@ -13,7 +13,7 @@ const calculate = async (ctx) => {
     ctx.body = await helpers.calculateOrder(pizzas);
 };
 
-const delete_ = async (ctx) => {
+const remove = async (ctx) => {
     const { id: orderId } = ctx.params;
 
     if (!orderId) {
@@ -41,5 +41,5 @@ const delete_ = async (ctx) => {
 
 module.exports = {
     calculate,
-    delete_
+    remove
 };

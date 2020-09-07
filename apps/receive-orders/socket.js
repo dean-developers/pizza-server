@@ -117,6 +117,7 @@ export default {
         socket.on('received', async function() {
             logger.info('[EMIT] received');
             const orders = await model.PizzaOrder.findAll({
+                attributes: ['id', 'orderId', 'additionalIngredients', 'sum', 'weight', 'createdAt', 'updatedAt'],
                 include: [
                     {
                         model: model.Pizza,
@@ -136,10 +137,19 @@ export default {
                         }
                     }
                 ],
-                order: [['orderId', 'DESC']]
+                order: [['orderId', 'DESC']],
+                raw: true,
+                nest: true
             });
 
-            io.emit('orders', orders);
+            const grouped = helpers.groupBy(orders, 'orderId');
+
+            const result = Object.keys(grouped).map((key) => ({
+                id: key,
+                orders: grouped[key] || []
+            }));
+
+            io.emit('orders', result);
         });
     }
 };
