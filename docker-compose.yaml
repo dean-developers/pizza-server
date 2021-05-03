@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  pg:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: pizza
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    image: app:latest
+    environment:
+      POSTGRES_HOST: pg
+      POSTGRES_PASSWORD: postgres
+    command: /bin/sh -c "cd /app && chmod +x /app/migrate.sh && ./migrate.sh && npm start"
+    ports:
+      - 3000:3000
+    depends_on:
+      - pg
+
+volumes:
+  db-data:
+    driver: local
