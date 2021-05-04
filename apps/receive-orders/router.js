@@ -27,7 +27,7 @@ router.put('/pizza/:id', Auth.checkToken, Pizza.change);
 router.delete('/pizza/:id', Auth.checkToken, Pizza.deletePizza);
 router.get('/ingredients', Auth.checkToken, Pizza.ingredients);
 router.post('/order/calculate', Auth.checkToken, Order.calculate);
-router.delete('/order/:id', Auth.checkToken, Order.remove);
+router.delete('/order/:id', Auth.checkToken, Order.delete_);
 
 export function receiveOrdersRoutes() {
     return router.routes()
