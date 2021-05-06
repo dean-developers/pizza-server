@@ -10,7 +10,8 @@ const pizzas = async (ctx) => {
             name && {
                 name:
                     { [model.Sequelize.Op.iLike]: `%${name}%` }
-            })
+            }),
+        order: [['updatedAt', 'DESC']]
     });
 };
 
