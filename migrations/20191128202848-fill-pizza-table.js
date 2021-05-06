@@ -1,48 +1,65 @@
 module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert('Pizzas', [{
-            name: 'Capricciosa',
+            name: 'Cukier z cynamonem',
             price: '129',
             size: '30',
             weight: '430',
-            ingredients: ['tomato sauce', 'mozzarella cheese', 'ham', 'fresh mushrooms']
+            ingredients: ['cukier', 'cynamon']
         }, {
-            name: 'Cesario',
+            name: 'Cukier puder',
             price: '167',
             size: '30',
             weight: '580',
-            ingredients: ['creamy sauce', 'tomatoes', 'crispy salad', 'parmesan cheese', 'chicken',
-                'mozzarella cheese', 'quail eggs']
+            ingredients: ['cukier puder']
         }, {
-            name: 'Salami',
+            name: 'Lukier malina z marakują',
             price: '117',
             size: '30',
             weight: '390',
-            ingredients: ['tomato sauce', 'mozzarella cheese', 'salami']
+            ingredients: ['pulpa malinowa', 'pulpa marakuja', 'cukier puder']
         }, {
-            name: 'Margarita',
+            name: 'Biała czekolada z borówkami',
             price: '99',
             size: '30',
             weight: '400',
-            ingredients: ['tomato sauce', 'mozzarella cheese', 'tomatoes']
+            ingredients: ['biała czekolada', 'suszone borówki']
         }, {
-            name: 'Diabola',
+            name: 'Kit kat z masłem orzechowym',
             price: '114',
             size: '30',
             weight: '405',
-            ingredients: ['tomato sauce', 'mozzarella cheese', 'chili pepper', 'pepperoni']
+            ingredients: ['mleczna czekolada', 'masło orzechowe', 'kruszone wafelki', 'kulki czekoladowe', 'batonik Kit Kat']
         }, {
-            name: 'Carbonara',
+            name: 'Lion kokosowy',
             price: '132',
             size: '30',
             weight: '460',
-            ingredients: ['tomato sauce', 'ham', 'baked egg', 'mozzarella cheese', 'bavarian sausages']
+            ingredients: ['biała czekolada z kokosem', 'płatki śniadaniowe Lion', 'karmel kokosowy', 'batonik Lion']
         }, {
-            name: 'Prosciutto',
+            name: 'Dakłas',
             price: '127',
             size: '30',
             weight: '390',
-            ingredients: ['tomato sauce', 'mozzarella cheese', 'ham']
+            ingredients: ['krem śmietankowy z mascarpone', 'orzechy włoskie', 'daktyle', 'beziki', 'kakao']
+        }, {
+            name: 'Cini Minis',
+            price: '127',
+            size: '30',
+            weight: '390',
+            ingredients: ['cynamonowa czekolada', 'płatki śniadaniowe Cini Minies']
+        }, {
+            name: 'Kinder Mleczna Kanapka',
+            price: '127',
+            size: '30',
+            weight: '390',
+            ingredients: ['krem na bazie mascarpone', 'miodowa polewa', 'kakaowe ciasto biszkoptowe']
+        }, {
+            name: 'Beza Pavlova',
+            price: '127',
+            size: '30',
+            weight: '390',
+            ingredients: ['krem na bazie mascarpone', 'lukier', 'brzoskwinia', 'borówka', 'truskawka', 'bezy']
         }].map(it => Object.assign(it, {
             createdAt: new Date(),
             updatedAt: new Date()
@@ -53,13 +70,16 @@ module.exports = {
         return queryInterface.bulkDelete('Pizzas', {
             name: {
                 [Sequelize.Op.in]: [
-                    'Capricciosa',
-                    'Cesario',
-                    'Salami',
-                    'Margarita',
-                    'Diabola',
-                    'Carbonara',
-                    'Prosciutto'
+                    'Cukier z cynamonem',
+                    'Cukier puder',
+                    'Lukier malina z marakują',
+                    'Biała czekolada z borówkami',
+                    'Kit kat z masłem orzechowym',
+                    'Lion kokosowy',
+                    'Dakłas',
+                    'Cini Minis',
+                    'Kinder Mleczna Kanapka',
+                    'Beza Pavlova'
                 ]
             }
         });

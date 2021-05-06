@@ -4,7 +4,7 @@
     "private": true,
     "description": "",
     "scripts": {
-	    "start": "node start.js",
+        "start": "node start.js",
         "dev-start": "pm2 start development.json",
         "migrate": "node_modules/.bin/sequelize db:migrate",
         "migrate:undo": "node_modules/.bin/sequelize db:migrate:undo"

@@ -1,58 +1,54 @@
 module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert('Ingredients', [{
-            name: 'Barbecue sauce',
+            name: 'Cukier',
             price: '19',
             weight: '50'
         }, {
-            name: 'Zesty sauce',
+            name: 'Cynamon',
             price: '19',
             weight: '50'
         }, {
-            name: 'Ceasar sauce',
+            name: 'Biała czekolada',
             price: '19',
             weight: '50'
         }, {
-            name: 'Ham',
+            name: 'Kruszone wafelki',
             price: '38',
             weight: '50'
         }, {
-            name: 'Mushrooms',
-            price: '19',
-            weight: '50'
-        }, {
-            name: 'Tomatoes',
+            name: 'Kulki czekoladowe',
             price: '18',
             weight: '50'
         }, {
-            name: 'Onion',
+            name: 'Batonik Kit Kat',
             price: '10',
             weight: '25'
         }, {
-            name: 'Corn',
+            name: 'Biała czekolada z kokosem',
             price: '18',
             weight: '50'
         }, {
-            name: 'Olives',
+            name: 'Płatki śniadaniowe Lion',
             price: '42',
             weight: '50'
         }, {
-            name: 'Pineapple',
+            name: 'Karmel kokosowy',
             price: '29',
-            weight: '50'
+            weight: '30'
         }, {
-            name: 'Chicken',
+            name: 'Batonik Lion',
             price: '29',
-            weight: '50'
+            weight: '10'
         }, {
-            name: 'Salami',
+            name: 'Kakao',
             price: '33',
-            weight: '50'
+            weight: '20'
         }].map(it => Object.assign(it, {
             createdAt: new Date(),
             updatedAt: new Date()
         })));
     },
 
-    down: (queryInterface, Sequelize) => {}
+    down: (queryInterface, Sequelize) => Promise.resolve()
 };
