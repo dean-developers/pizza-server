@@ -13,8 +13,8 @@ module.exports = {
         }, {
             code: 'poz',
             name: 'Poznań',
-            latitude: 52.232361,
-            longitude: 21.002769
+            latitude: 52.406376,
+            longitude: 16.925167
         }].map(it => Object.assign(it, {
             createdAt: new Date(),
             updatedAt: new Date()
